@@ -1,0 +1,209 @@
+cmake_minimum_required(VERSION 3.6)
+project(audio_tool)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+#add_subdirectory(webrtc)
+
+set(CURRENT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+#WEBRTC
+set(WEBRCT_DIR ${CURRENT_DIR}/webrtc)
+set(WEBRCT_INCLUDE ${CURRENT_DIR}/webrtc)
+#webrtc->base
+set(WEBRCT_BASE_DIR ${WEBRCT_DIR}/base)
+set(WEBRCT_BASE_INCLUDE ${WEBRCT_DIR}/base)
+#webrtc->common_audio
+set(WEBRCT_COMMON_AUDIO_DIR ${WEBRCT_DIR}/common_audio)
+set(WEBRCT_COMMON_AUDIO_INCLUDE ${WEBRCT_DIR}/common_audio ${WEBRCT_DIR}/common_audio/include)
+#webrtc->common_audio->resampler
+set(WEBRCT_COMMON_AUDIO_RESAMPLER_DIR ${WEBRCT_DIR}/common_audio/resampler)
+set(WEBRCT_COMMON_AUDIO_RESAMPLER_INCLUDE  ${WEBRCT_DIR}/common_audio/resampler ${WEBRCT_DIR}/common_audio/resampler/include)
+#webrtc->common_audio->signal_processing
+set(WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_DIR ${WEBRCT_DIR}/common_audio/signal_processing)
+set(WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE ${WEBRCT_DIR}/common_audio/signal_processing ${WEBRCT_DIR}/common_audio/signal_processing/include)
+#webrtc->common_audio->vad
+set(WEBRCT_COMMON_AUDIO_VAD_DIR ${WEBRCT_DIR}/common_audio/vad)
+set(WEBRCT_COMMON_AUDIO_VAD_INCLUDE ${WEBRCT_DIR}/common_audio/vad ${WEBRCT_DIR}/common_audio/vad/include ${WEBRCT_DIR}/common_audio/mock)
+#webrtc->json_cpp
+set(WEBRCT_JSON_CPP_DIR ${WEBRCT_DIR}/json_cpp/src/lib_json)
+set(WEBRCT_JSON_CPP_INCLUDE ${WEBRCT_DIR}/json_cpp ${WEBRCT_DIR}/json_cpp/include)
+
+#webrtc->modules->audio_processing
+set(WEBRCT_MODULES_AUDIO_PROCESSING_DIR ${WEBRCT_DIR}/modules/audio_processing)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_INCLUDE ${WEBRCT_DIR}/modules/audio_processing ${WEBRCT_DIR}/modules/audio_processing/include)
+#webrtc->modules->audio_processing->aec
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AEC_DIR ${WEBRCT_DIR}/modules/audio_processing/aec)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AEC_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/aec)
+#webrtc->modules->audio_processing->aecm
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AECM_DIR ${WEBRCT_DIR}/modules/audio_processing/aecm)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AECM_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/aecm)
+#webrtc->modules->audio_processing->agc
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AGC_DIR ${WEBRCT_DIR}/modules/audio_processing/agc)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AGC_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/agc)
+#webrtc->modules->audio_processing->agc->legacy
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_DIR ${WEBRCT_DIR}/modules/audio_processing/agc/legacy)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/agc/legacy)
+#webrtc->modules->audio_processing->beamformer
+set(WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_DIR ${WEBRCT_DIR}/modules/audio_processing/beamformer)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/beamformer)
+#webrtc->modules->audio_processing->intelligibility
+set(WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_DIR ${WEBRCT_DIR}/modules/audio_processing/intelligibility)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/intelligibility)
+#webrtc->modules->audio_processing->level_controller
+set(WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_DIR ${WEBRCT_DIR}/modules/audio_processing/level_controller)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/level_controller)
+#webrtc->modules->audio_processing->logging
+set(WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_DIR ${WEBRCT_DIR}/modules/audio_processing/logging)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/logging)
+#webrtc->modules->audio_processing->ns
+set(WEBRCT_MODULES_AUDIO_PROCESSING_NS_DIR ${WEBRCT_DIR}/modules/audio_processing/ns)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_NS_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/ns)
+#webrtc->modules->audio_processing->transient
+set(WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_DIR ${WEBRCT_DIR}/modules/audio_processing/transient)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/transient)
+#webrtc->modules->audio_processing->utility
+set(WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_DIR ${WEBRCT_DIR}/modules/audio_processing/utility)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/utility)
+#webrtc->modules->audio_processing->vad
+set(WEBRCT_MODULES_AUDIO_PROCESSING_VAD_DIR ${WEBRCT_DIR}/modules/audio_processing/vad)
+set(WEBRCT_MODULES_AUDIO_PROCESSING_VAD_INCLUDE ${WEBRCT_DIR}/modules/audio_processing/vad)
+#webrtc->system_wrappers
+set(WEBRCT_SYSTEM_WRAPPERS_DIR ${WEBRCT_DIR}/system_wrappers/source)
+set(WEBRCT_SYSTEM_WRAPPERS_INCLUDE ${WEBRCT_DIR}/system_wrappers/source ${WEBRCT_DIR}/system_wrappers/indlude ${WEBRCT_DIR}/system_wrappers/source/spreadsortlib )
+
+#webrtc->modules->utility
+set(WEBRCT_MODULES_UTILITY_DIR ${WEBRCT_DIR}/modules/utility/source)
+set(WEBRCT_MODULES_UTILITY_INCLUDE ${WEBRCT_DIR}/modules/utility ${WEBRCT_DIR}/modules/utility/include)
+#webrtc->modules->audio_coding
+set(WEBRCT_MODULES_AUDIO_CODING_DIR ${WEBRCT_DIR}/modules/audio_coding/codecs)
+set(WEBRCT_MODULES_AUDIO_CODING_INCLUDE ${WEBRCT_DIR}/modules/audio_coding/codecs)
+#webrtc->modules->audio_coding->isac
+set(WEBRCT_MODULES_AUDIO_CODING_ISAC_DIR ${WEBRCT_DIR}/modules/audio_coding/codecs/isac)
+set(WEBRCT_MODULES_AUDIO_CODING_ISAC_INCLUDE ${WEBRCT_DIR}/modules/audio_coding/codecs/isac)
+#webrtc->modules->audio_coding->main
+set(WEBRCT_MODULES_AUDIO_CODING_MAIN_DIR  ${WEBRCT_DIR}/modules/audio_coding/codecs/isac/main/source )
+set(WEBRCT_MODULES_AUDIO_CODING_MAIN_INCLUDE ${WEBRCT_DIR}/modules/audio_coding/codecs/isac/main/source ${WEBRCT_DIR}/modules/audio_coding/codecs/isac/main/include ${WEBRCT_DIR}/modules/audio_coding/codecs/isac/main/util)
+
+
+if (WIN32)
+        add_definitions(-DWEBRTC_WIN)
+else()
+        add_definitions(-DWEBRTC_POSIX)
+endif ()
+
+if (ANDROID)
+        add_definitions(-DWEBRTC_ANDROID)
+endif ()
+if (IOS)
+        add_definitions(-DWEBRTC_IOS)
+endif ()
+if (MAC)
+        add_definitions(-DWEBRTC_MAC)
+endif ()
+if (LINUX)
+        add_definitions(-DWEBRTC_LINUX)
+endif ()
+add_definitions(
+        -DWEBRTC_NS_FLOAT
+)
+include_directories(
+        ${CURRENT_DIR}
+        ${WEBRCT_INCLUDE}
+        ${WEBRCT_BASE_INCLUDE}
+        ${WEBRCT_COMMON_AUDIO_INCLUDE}
+        ${WEBRCT_COMMON_AUDIO_RESAMPLER_INCLUDE}
+        ${WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_INCLUDE}
+        ${WEBRCT_COMMON_AUDIO_VAD_INCLUDE}
+        ${WEBRCT_JSON_CPP_INCLUDE}
+        ${WEBRCT_DIR}/modules/include
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AEC_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AECM_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_NS_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_VAD_INCLUDE}
+        ${WEBRCT_SYSTEM_WRAPPERS_INCLUDE}
+        ${WEBRCT_MODULES_UTILITY_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_CODING_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_CODING_ISAC_INCLUDE}
+        ${WEBRCT_MODULES_AUDIO_CODING_MAIN_INCLUDE}
+        )
+
+aux_source_directory(${WEBRCT_DIR}  WEBRCT_DIR_SRC)
+aux_source_directory(${WEBRCT_BASE_DIR} WEBRCT_BASE_DIR_SRC)
+aux_source_directory(${WEBRCT_COMMON_AUDIO_DIR} WEBRCT_COMMON_AUDIO_DIR_SRC)
+aux_source_directory(${WEBRCT_COMMON_AUDIO_RESAMPLER_DIR} WEBRCT_COMMON_AUDIO_RESAMPLER_DIR_SRC)
+aux_source_directory(${WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_DIR} WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_DIR_SRC)
+aux_source_directory(${WEBRCT_COMMON_AUDIO_VAD_DIR} WEBRCT_COMMON_AUDIO_VAD_DIR_SRC)
+aux_source_directory(${WEBRCT_JSON_CPP_DIR} WEBRCT_JSON_CPP_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_AEC_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_AEC_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_AECM_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_AECM_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_AGC_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_NS_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_NS_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_PROCESSING_VAD_DIR} WEBRCT_MODULES_AUDIO_PROCESSING_VAD_DIR_SRC)
+aux_source_directory(${WEBRCT_SYSTEM_WRAPPERS_DIR} WEBRCT_SYSTEM_WRAPPERS_DIR_SRC)
+
+aux_source_directory(${WEBRCT_MODULES_UTILITY_DIR} WEBRCT_MODULES_UTILITY_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_CODING_DIR} WEBRCT_MODULES_AUDIO_CODING_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_CODING_ISAC_DIR} WEBRCT_MODULES_AUDIO_CODING_ISAC_DIR_SRC)
+aux_source_directory(${WEBRCT_MODULES_AUDIO_CODING_MAIN_DIR} WEBRCT_MODULES_AUDIO_CODING_MAIN_DIR_SRC)
+aux_source_directory(${WEBRCT_DIR}/modules/audio_coding/codecs/isac/main/util WEBRCT_MODULES_AUDIO_CODING_MAIN_UTIL_DIR)
+
+add_library(${PROJECT_NAME}s STATIC
+        ${WEBRCT_DIR_SRC}
+        ${WEBRCT_BASE_DIR_SRC}
+        ${WEBRCT_COMMON_AUDIO_DIR_SRC}
+        ${WEBRCT_COMMON_AUDIO_RESAMPLER_DIR_SRC}
+        ${WEBRCT_COMMON_AUDIO_SIGNAL_PROCESSING_DIR_SRC}
+        ${WEBRCT_COMMON_AUDIO_VAD_DIR_SRC}
+        ${WEBRCT_JSON_CPP_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AEC_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AECM_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_AGC_LEGACY_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_BEAMFORMER_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_INTELLIGIBILITY_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_LEVEL_CONTROLLER_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_LOGGING_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_NS_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_TRANSIENT_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_UTILITY_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_PROCESSING_VAD_DIR_SRC}
+        ${WEBRCT_SYSTEM_WRAPPERS_DIR_SRC}
+        ${WEBRCT_MODULES_UTILITY_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_CODING_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_CODING_ISAC_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_CODING_MAIN_DIR_SRC}
+        ${WEBRCT_MODULES_AUDIO_CODING_MAIN_UTIL_DIR}
+        )
+
+set_target_properties(${PROJECT_NAME}s PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+
+if (ANDROID)
+        target_link_libraries(${PROJECT_NAME}s log)
+endif ()
+
+install(TARGETS ${PROJECT_NAME}s  LIBRARY DESTINATION ${PROJECT_BINARY_DIR}/lib ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/lib)
+#install(TARGETS ${PROJECT_NAME}  LIBRARY DESTINATION ${PROJECT_BINARY_DIR}/lib ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/lib)
+
+
+set(SOURCE_FILES main.cpp)
+add_executable(audio_test ${SOURCE_FILES})
+target_link_libraries(audio_test ${PROJECT_NAME}s)
